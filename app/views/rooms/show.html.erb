@@ -1,0 +1,14 @@
+<div>
+<%= image_tag "https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png" %>
+<div>
+<h1 class="hotel-name">
+  <%= @room.name %>
+</h1>
+<div class="introduction">
+  <%= @room.introduction %>
+</div>
+<div class="price">
+  宿泊料金： <%= @room.price %>円/日
+</div>
+<%= link_to '戻る', rooms_path, class: "back-link" %>
+

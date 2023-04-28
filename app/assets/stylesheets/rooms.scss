@@ -1,0 +1,33 @@
+// Place all the styles related to the Rooms controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+.hotel-name {
+    font-size: 2em;
+    font-weight: bold;
+    color: #333;
+    }
+    
+    .introduction {
+    margin-top: 20px;
+    font-size: 1.2em;
+    line-height: 1.5;
+    }
+    
+    .price {
+    margin-top: 20px;
+    font-size: 1.5em;
+    color: #008080;
+    }
+    
+    .back-link {
+    display: block;
+    margin-top: 30px;
+    text-align: center;
+    font-size: 1.2em;
+    color: #333;
+    text-decoration: none;
+    border: 2px solid #333;
+    padding: 10px 20px;
+    }
+    
+    

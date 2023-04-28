@@ -1,0 +1,48 @@
+<h1>施設作成</h1>
+
+<%= form_with(model: @room, local: true) do |form| %>
+  <% if @room.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@room.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+      <ul>
+        <% @room.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :施設名%>
+    <%= form.text_field :name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :施設詳細 %>
+    <%= form.text_area :introduction %>
+  </div>
+
+  <div class="field">
+    <%= form.label :料金 %>
+    <%= form.number_field :price %>
+  </div>
+  <div class="field">
+    <%= form.label :住所 %>
+    <%= form.text_field :address %>
+  </div>
+  
+
+ <div class="form-group">
+    <%= form.label :avatar %>
+    <%= form.file_field :avatar, class: "form-control" %>
+  </div>
+
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+<%= link_to '戻る', rooms_path %>
+
