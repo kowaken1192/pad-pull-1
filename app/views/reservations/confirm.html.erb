@@ -1,0 +1,42 @@
+<h1>予約確認</h1>
+
+<p>以下の詳細を確認して、予約を確定してください。</p>
+
+<table>
+  <tr>
+    <td>チェックイン日:</td>
+    <td><%= @reservation.check_in %></td>
+  </tr>
+  <tr>
+    <td>チェックアウト日:</td>
+    <td><%= @reservation.check_out %></td>
+  </tr>
+  <tr>
+    <td>宿泊日数:</td>
+    <td><%= @total_day %>日</td>
+  </tr>
+  <tr>
+    <td>人数:</td>
+    <td><%= @reservation.head_count %>人</td>
+  </tr>
+  <tr>
+    <td>支払い金額:</td>
+    <td><%= number_to_currency(@total_price) %></td>
+  </tr>
+</table>
+
+<%= form_with(model: @reservation, url: confirm_reservations_path, method: :post) do |f| %>
+  <%= f.hidden_field :room_id, value: @room.id %>
+  <%= f.label :check_in %>
+  <%= f.text_field :check_in, value: @reservation.check_in.strftime('%Y/%m/%d') %><br>
+
+  <%= f.label :check_out %>
+  <%= f.text_field :check_out, value: @reservation.check_out.strftime('%Y/%m/%d') %><br>
+
+  <%= f.label :head_count %>
+  <%= f.text_field :head_count, value: @reservation.head_count %><br>
+
+  <%= f.submit "予約する" %>
+<% end %>
+
+<%= link_to '戻る', @room %>

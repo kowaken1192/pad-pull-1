@@ -2,7 +2,7 @@ class UsersController < ApplicationController
     def index
       @users = User.all
     end
-        def show
+    def show
       @user= current_user
      
     end
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   
     def update
       @user = User.find(params[:id])
-  
+      binding.pry
       if @user.update(user_params)
         redirect_to user_path, notice: 'プロフィールを更新しました'
       else

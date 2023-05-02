@@ -1,0 +1,34 @@
+
+<h1>Reservations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Check in</th>
+      <th>Check out</th>
+      <th>Head count</th>
+      <th>User</th>
+      <th>Room</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+      <% @reservations.each do |user| %>
+      <tr>
+        <td><%= reservation.check_in %></td>
+        <td><%= reservation.check_out %></td>
+        <td><%= reservation.head_count %></td>
+        <td><%= reservation.user_id %></td>
+        <td><%= reservation.room_id %></td>
+        
+        <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
+        <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Reservation', new_reservation_path %>

@@ -1,47 +1,33 @@
 class RoomsController < ApplicationController
-  before_action :set_room, only: %i[ show edit update destroy ]
+ 
 
-    def index
-      @rooms = Room.all
-    end
-  
-    def show
-      @room = Room.find(params[:id])
-    end
-  
-    def new
-      @room = Room.new
-    end
-  
-    def create
-      @room = Room.new(room_params)
-      if @room.save
-        redirect_to @room
-      else
-        render 'new'
-      end
-    end
-  
-    private
-  
-    def room_params
-      params.require(:room).permit(:name, :introduction, :price, :address, :avatar)
-    end
+  def index
+    @rooms = Room.all
+  end
 
-  
+  def show
+    @room = Room.find(params[:id])
+  end
 
-    respond_to do |format|
-      if @room.save
-        format.html { redirect_to room_url(@room), notice: "Room was successfully created." }
-        format.json { render :show, status: :created, location: @room }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
-      end
+  def new
+    @room = Room.new
+    @reservation = Reservation.new
+  end
+
+  def create
+    @room = Room.new(room_params)
+    if @room.save  
+      redirect_to @room
+    else
+      render 'new'
     end
   end
 
-  # PATCH/PUT /rooms/1 or /rooms/1.json
+  def confirm
+    @reservation = Reservation.new(params.require(:reservation).permit(:check_in, :check_out, :head_count, ))
+    binding.pry
+  end
+
   def update
     respond_to do |format|
       if @room.update(room_params)
@@ -54,7 +40,6 @@ class RoomsController < ApplicationController
     end
   end
 
-  # DELETE /rooms/1 or /rooms/1.json
   def destroy
     @room.destroy
 
@@ -65,12 +50,12 @@ class RoomsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_room
-      @room = Room.find(params[:id])
-    end
-
-    # Only allow a list of trusted parameters through.
-    def room_params
-      params.require(:room).permit(:name, :introduction, :price, :address,:avatar)
-    end
+  def set_room
+    @room = Room.find(params[:id])
+  end
+ 
+  def room_params
+    params.require(:room).permit(:name, :introduction, :price, :address, :avatar)
+  end
+  
+end

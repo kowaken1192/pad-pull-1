@@ -10,5 +10,28 @@
 <div class="price">
   宿泊料金： <%= @room.price %>円/日
 </div>
+<%= form_with(model: @reservation, method: :post, url: confirm_rooms_path(@room, @reservation)) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :check_in, "チェックイン" %>
+    <%= f.datetime_select :check_in, class: "form-control datepicker", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :check_out, "チェックアウト" %>
+    <%= f.datetime_select :check_out, class: "form-control datepicker", required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :guests, "宿泊人数" %>
+    <%= f.number_field :guests, class: "form-control", min: 1, required: true %>
+  </div>
+
+  <%= f.hidden_field :room_id, value: @room.id %>
+
+  <%= f.submit "予約する",  class: "btn btn-primary" %>
+<% end %> 
+
+
 <%= link_to '戻る', rooms_path, class: "back-link" %>
 
