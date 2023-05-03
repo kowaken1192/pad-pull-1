@@ -10,7 +10,7 @@
 <div class="price">
   宿泊料金： <%= @room.price %>円/日
 </div>
-<%= form_with(model: @reservation, method: :post, url: confirm_rooms_path(@room, @reservation)) do |f| %>
+<%= form_with(model: @reservation, method: :post, url: confirm_reservations_path) do |f| %>
 
   <div class="form-group">
     <%= f.label :check_in, "チェックイン" %>
@@ -28,10 +28,7 @@
   </div>
 
   <%= f.hidden_field :room_id, value: @room.id %>
-
   <%= f.submit "予約する",  class: "btn btn-primary" %>
 <% end %> 
-
-
 <%= link_to '戻る', rooms_path, class: "back-link" %>
 

@@ -6,7 +6,6 @@ class CreateReservations < ActiveRecord::Migration[6.1]
       t.integer :head_count
       t.references :user, null: false, foreign_key: true
       t.references :room, null: false, foreign_key: true
-
       t.timestamps
     end
   end

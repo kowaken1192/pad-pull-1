@@ -1,6 +1,4 @@
-<h1>予約確認</h1>
-
-<p>以下の詳細を確認して、予約を確定してください。</p>
+<h1>予約確認ページ</h1>
 
 <table>
   <tr>
@@ -17,26 +15,20 @@
   </tr>
   <tr>
     <td>人数:</td>
-    <td><%= @reservation.head_count %>人</td>
+
   </tr>
   <tr>
     <td>支払い金額:</td>
-    <td><%= number_to_currency(@total_price) %></td>
+    <td><%= @total_price %>円</td>
   </tr>
 </table>
 
-<%= form_with(model: @reservation, url: confirm_reservations_path, method: :post) do |f| %>
+<%= form_with(model: @reservation, method: :post, url: reservations_path) do |f| %>
+  <%= f.hidden_field :check_in, value: @reservation.check_in %>
+  <%= f.hidden_field :check_out, value: @reservation.check_out %>
+
   <%= f.hidden_field :room_id, value: @room.id %>
-  <%= f.label :check_in %>
-  <%= f.text_field :check_in, value: @reservation.check_in.strftime('%Y/%m/%d') %><br>
-
-  <%= f.label :check_out %>
-  <%= f.text_field :check_out, value: @reservation.check_out.strftime('%Y/%m/%d') %><br>
-
-  <%= f.label :head_count %>
-  <%= f.text_field :head_count, value: @reservation.head_count %><br>
-
-  <%= f.submit "予約する" %>
+  <%= f.submit "予約する",  class: "btn btn-primary" %>
 <% end %>
 
-<%= link_to '戻る', @room %>
+<%= link_to '戻る', :back, class: "back-link" %>

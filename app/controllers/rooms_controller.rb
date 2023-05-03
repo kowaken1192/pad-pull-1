@@ -1,12 +1,6 @@
 class RoomsController < ApplicationController
- 
-
   def index
     @rooms = Room.all
-  end
-
-  def show
-    @room = Room.find(params[:id])
   end
 
   def new
@@ -14,32 +8,29 @@ class RoomsController < ApplicationController
     @reservation = Reservation.new
   end
 
+  def show    
+    @room = Room.find(params[:id])
+  end
+
   def create
-    @room = Room.new(room_params)
-    if @room.save  
+    @room = Room.new(params.require(:room).permit(:name, :introduction, :price, :address, :avatar))
+    if @room.save
       redirect_to @room
     else
       render 'new'
     end
   end
-
-  def confirm
-    @reservation = Reservation.new(params.require(:reservation).permit(:check_in, :check_out, :head_count, ))
-    binding.pry
-  end
-
   def update
-    respond_to do |format|
-      if @room.update(room_params)
-        format.html { redirect_to room_url(@room), notice: "Room was successfully updated." }
-        format.json { render :show, status: :ok, location: @room }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @room.errors, status: :unprocessable_entity }
-      end
+    @room = Room.find(params[:id])
+    if @room.update(params.require(:room).permit(:name, :introduction, :price, :address, :avatar))
+
+      redirect_to @room, notice: 'ルーム情報を更新しました'
+    else
+      render :edit
     end
   end
-
+  
+  
   def destroy
     @room.destroy
 
@@ -48,14 +39,13 @@ class RoomsController < ApplicationController
       format.json { head :no_content }
     end
   end
+end
 
-  private
-  def set_room
-    @room = Room.find(params[:id])
-  end
- 
-  def room_params
-    params.require(:room).permit(:name, :introduction, :price, :address, :avatar)
-  end
-  
+private
+def set_room
+  @room = Room.find(params[:id])
+end
+
+def room_params
+  params.require(:room).permit(:name, :introduction, :price, :address, :avatar)
 end

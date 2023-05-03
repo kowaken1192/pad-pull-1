@@ -12,14 +12,21 @@ Rails.application.routes.draw do
   get '/rooms',to:'rooms/#new'
   post '/rooms', to: 'rooms#update'
   get '/reservations', to: 'reservations#index'
-  resources :rooms do
+  get '/reservations', to: 'reservations#new'
+  get '/rooms', to: 'rooms#confirm', as: 'confirm'
+  get '/confirm', to: 'confirm#index'
+  post '/rooms/:id/confirm', to: 'rooms#confirm', as: 'confirm_room'
+  post '/reservations/confirm', to: 'reservations#confirm'
+
+  resources :reservations do
     collection do
-      get 'confirm'
-      post 'confirm', to: 'rooms#confirm'
+      get :confirm
     end
   end
-  
+  resources :reservations do
+    get 'show/:id', to: 'rooms#show', as: 'show'
+  end
+end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-end
 
