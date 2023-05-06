@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     end
   end
   resources :reservations do
-    get 'show/:id', to: 'rooms#show', as: 'show'
+    get 'show/id', to: 'rooms#show', as: 'show'
   end
 end
 

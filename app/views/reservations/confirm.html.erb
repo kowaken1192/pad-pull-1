@@ -15,20 +15,17 @@
   </tr>
   <tr>
     <td>人数:</td>
-
+    <td><%= @room.guest %></td>
   </tr>
   <tr>
     <td>支払い金額:</td>
     <td><%= @total_price %>円</td>
   </tr>
+  <tr>
+    <td>金額</td>
+    <td> <%= @room.price %>円/日</td>
 </table>
+<h2>部屋を予約する</h2>
 
-<%= form_with(model: @reservation, method: :post, url: reservations_path) do |f| %>
-  <%= f.hidden_field :check_in, value: @reservation.check_in %>
-  <%= f.hidden_field :check_out, value: @reservation.check_out %>
-
-  <%= f.hidden_field :room_id, value: @room.id %>
-  <%= f.submit "予約する",  class: "btn btn-primary" %>
-<% end %>
 
 <%= link_to '戻る', :back, class: "back-link" %>

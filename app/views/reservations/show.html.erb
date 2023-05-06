@@ -1,6 +1,4 @@
-<h1>予約確認</h1>
-
-<p>以下の詳細を確認して、予約を確定してください。</p>
+<h1>予約確認ページ</h1>
 
 <table>
   <tr>
@@ -17,14 +15,41 @@
   </tr>
   <tr>
     <td>人数:</td>
-    <td><%= @reservation.head_count %>人</td>
+    <td><%= @room.guest %></td>
   </tr>
   <tr>
     <td>支払い金額:</td>
-    <td><%= number_to_currency(@total_price) %></td>
+    <td><%= @total_price %>円</td>
   </tr>
+  <tr>
+    <td>金額</td>
+    <td> <%= @room.price %>円/日</td>
 </table>
+<h1>予約確認ページ</h1>
 
-
-<%= link_to '戻る', @room %>
-
+<table>
+  <tr>
+    <td>チェックイン日:</td>
+    <td><%= @reservation.check_in %></td>
+  </tr>
+  <tr>
+    <td>チェックアウト日:</td>
+    <td><%= @reservation.check_out %></td>
+  </tr>
+  <tr>
+    <td>宿泊日数:</td>
+    <td><%= @total_day %>日</td>
+  </tr>
+  <tr>
+    <td>人数:</td>
+    <td><%= @number_of_people %></td>
+  </tr>
+  <tr>
+    <td>支払い金額:</td>
+    <td><%= @total_price %>円</td>
+  </tr>
+  <tr>
+    <td>金額</td>
+    <td> <%= @room.price %>円/日</td>
+</table>
+<%= link_to '戻る', :back, class: "back-link" %>
