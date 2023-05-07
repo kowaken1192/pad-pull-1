@@ -16,9 +16,11 @@ Rails.application.routes.draw do
   get '/rooms', to: 'rooms#confirm', as: 'confirm'
   get '/confirm', to: 'confirm#index'
   post '/rooms/:id/confirm', to: 'rooms#confirm', as: 'confirm_room'
-  post '/reservations/confirm', to: 'reservations#confirm'
+  post '/reservations/confirm', to: 'reservations#confirm', as: 'confirm_reservations'
 
-  resources :reservations do
+  
+
+  resources :reservation do
     collection do
       get :confirm
     end
@@ -27,6 +29,7 @@ Rails.application.routes.draw do
     get 'show/id', to: 'rooms#show', as: 'show'
   end
 end
+
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 

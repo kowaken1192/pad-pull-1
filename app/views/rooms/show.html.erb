@@ -12,7 +12,6 @@
 </div>
 
 <%= form_with(model: @reservation, method: :post, url: confirm_reservations_path) do |f| %>
-
   <div class="form-group">
     <%= f.label :check_in, "チェックイン" %>
     <%= f.datetime_select :check_in, class: "form-control datepicker", required: true %>
@@ -22,13 +21,12 @@
     <%= f.label :check_out, "チェックアウト" %>
     <%= f.datetime_select :check_out, class: "form-control datepicker", required: true %>
   </div>
+ <div class="form-group">
+  <%= f.label :head_count, "宿泊人数" %>
+  <%= f.number_field :head_count, class: "form-control", min: 1, required: true %>
+</div>
 
-  <div class="form-group">
-    <%= f.label :guest, "宿泊人数" %>
-    <%= f.number_field :guest, class: "form-control", min: 1, required: true %>
-  </div>
 
-  <%= f.hidden_field :room_id, value: @room.id %>
   <%= f.submit "予約する",  class: "btn btn-primary" %>
 <% end %> 
 <%= link_to '戻る', rooms_path, class: "back-link" %>
