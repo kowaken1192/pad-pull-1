@@ -1,48 +1,55 @@
 class RoomsController < ApplicationController
   def index
-    @rooms = Room.all
+    @user = current_user
+    @rooms = @user.rooms
   end
 
   def new
+    @user = current_user
     @room = Room.new
+  end
+  def create
+    @user = current_user
+    @room = Room.new(room_params)
+    if @room.save
+      redirect_to @room, notice: 'Room was successfully created.'
+    else
+      render :new
+    end
+  end
+  
+  def show
+    @user = current_user
+    @room = Room.find(params[:id])
     @reservation = Reservation.new
   end
 
-  def show    
+  def edit
+    @user = current_user
     @room = Room.find(params[:id])
   end
 
-  def create
-    @room = Room.new(params.require(:room).permit(:name, :introduction, :price, :address, :avatar))
-    if @room.save
-      redirect_to @room
-    else
-      render 'new'
-    end
-  end
   def update
     @room = Room.find(params[:id])
-    if @room.update(params.require(:room).permit(:name, :introduction, :price, :address, :avatar))
-
-      redirect_to @room, notice: 'ルーム情報を更新しました'
+    if @room.update(params.require(:room).permit(:name, :information, :price, :address, :user_id, :image))
+      redirect_to rooms_path
     else
-      render :edit
+      render "edit"
     end
   end
-  
-  
+
   def destroy
+    @room = Room.find(params[:id])
     @room.destroy
-
-    respond_to do |format|
-      format.html { redirect_to rooms_url, notice: "Room was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to rooms_path
   end
-end
 
-
-
-def room_params
-  params.require(:room).permit(:name, :introduction, :price, :address, :avatar)
+  def search
+    @user = current_user
+    @q = Room.ransack(params[:q])
+    @rooms = @q.result(distinct: true)
+  end
+  def room_params
+    params.require(:room).permit(:name, :introduction, :price, :address, :avatar,:user_id)
+  end
 end

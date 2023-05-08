@@ -17,9 +17,11 @@ Rails.application.routes.draw do
   get '/confirm', to: 'confirm#index'
   post '/rooms/:id/confirm', to: 'rooms#confirm', as: 'confirm_room'
   post '/reservations/confirm', to: 'reservations#confirm', as: 'confirm_reservations'
-
-  
-
+  resources :reservations do
+    member do
+      post 'confirm' ,to: 'reservations#confirm'
+    end
+  end
   resources :reservation do
     collection do
       get :confirm

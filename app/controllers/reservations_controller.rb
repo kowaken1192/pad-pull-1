@@ -12,7 +12,7 @@ class ReservationsController < ApplicationController
   def create
     @room = Room.find.(params[:room_id])
     @reservation = @room.reservations.(reservation_params)
-    binding.pry
+    
     if @reservation.save
       redirect_to reservation_confirmation_path(@reservation)
     else
@@ -23,8 +23,7 @@ class ReservationsController < ApplicationController
 
   def show
     @reservation = Reservation.find.(:room_id)
-    @room = @reservation.room
-    binding.pry
+    @room = @reservation
     if @reservation.nil?
       flash[:error] = '予約情報が見つかりませんでした。'
       redirect_to root_path and return
