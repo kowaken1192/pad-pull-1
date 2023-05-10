@@ -9,15 +9,14 @@ class RoomsController < ApplicationController
     @room = Room.new
   end
   def create
-    @user = current_user
     @room = Room.new(room_params)
-    if @room.save
-      redirect_to @room, notice: 'Room was successfully created.'
-    else
-      render :new
+      if @room.save
+        redirect_to @room, notice: 'Room was successfully created.'
+      else
+        render :new
+      end
     end
-  end
-  
+
   def show
     @user = current_user
     @room = Room.find(params[:id])
@@ -31,7 +30,7 @@ class RoomsController < ApplicationController
 
   def update
     @room = Room.find(params[:id])
-    if @room.update(params.require(:room).permit(:name, :information, :price, :address, :user_id, :image))
+    if @room.update(params.require(:room).permit(:name, :information, :price, :address, :user_id,:room_id, :image))
       redirect_to rooms_path
     else
       render "edit"
@@ -50,6 +49,6 @@ class RoomsController < ApplicationController
     @rooms = @q.result(distinct: true)
   end
   def room_params
-    params.require(:room).permit(:name, :introduction, :price, :address, :avatar,:user_id)
+    params.require(:room).permit(:name, :introduction, :price, :address, :avatar,:user_id,:room_id)
   end
 end

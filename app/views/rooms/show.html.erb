@@ -11,7 +11,9 @@
   宿泊料金： <%= @room.price %>円/日
 </div>
 
-<%= form_with model: @reservation, url:confirm_reservation_path do |f| %>
+<%= form_with model: @reservation, url: confirm_reservation_path, method: :post do |f| %>
+ 
+
   <table>
    <tr>
     <th><%= f.label :check_in, "チェックイン" %></th>
@@ -27,9 +29,10 @@
     <th><%= f.label :number_of_people, "人数" %></th>
     <td><%= f.text_field :number_of_people %></td>
    <tr>
-
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :room_id, value: @room.id %>
   </table>
- 
+
   
   <%= f.submit "登録する" %>
 <% end %>

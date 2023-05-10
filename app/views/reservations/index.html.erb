@@ -1,32 +1,28 @@
-
-<h1>Reservations</h1>
+<h3>予約済み施設一覧</h3>
 
 <table>
   <thead>
     <tr>
-      <th>Check in</th>
-      <th>Check out</th>
-      <th>Head count</th>
-     
-      <th colspan="3"></th>
+      <th>施設画像</th>
+      <th>施設名</th>
+      <th>施設詳細</th>
+      <th>金額</th>
+      <th>チェックイン</th>
+      <th>チェックアウト</th>
+      <th>予約確定日時</th>
     </tr>
   </thead>
-
   <tbody>
-      <% @reservations.each do |reservation| %>
+    <% @reservations.each do |reservation| %>
       <tr>
-        <td><%= reservation.check_in %></td>
-        <td><%= reservation.check_out %></td>
-        <td><%= reservation.head_count %></td>
-        
-        
-        <td><%= link_to 'Edit', edit_reservation_path(reservation) %></td>
-        <td><%= link_to 'Destroy', reservation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= image_tag "https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png", width:200%> <br>
+        <td><%= link_to reservation.room.name, room_path(reservation.room) %></td>
+        <td><%= reservation.room.introduction %></td>
+        <td><%= reservation.room.price * reservation.number_of_people * (reservation.check_out - reservation.check_in).to_i %>円</td>
+        <td><%= reservation.check_in.strftime('%Y/%m/%d') %></td>
+        <td><%= reservation.check_out.strftime('%Y/%m/%d') %></td>
+        <td><%= reservation.created_at.strftime('%Y/%m/%d %H:%M') %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New Reservation', new_reservation_path %>

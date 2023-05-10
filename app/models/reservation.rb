@@ -6,7 +6,7 @@ class Reservation < ApplicationRecord
   validates :head_count, presence: true, numericality: { only_integer: true, greater_than: 0 }
   validate :check_out_after_check_in
   validates :check_out, presence: true, if: :check_in_present?
-
+  attr_accessor :number_of_people
 
   def check_in_present?
     check_in.present?
