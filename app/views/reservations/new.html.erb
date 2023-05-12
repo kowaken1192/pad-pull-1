@@ -1,5 +1,4 @@
 <h1>予約確認ページ</h1>
-
 <table>
   <tr>
     <td>チェックイン日:</td>
@@ -24,15 +23,14 @@
   <tr>
     <td>金額</td>
     <td> <%= @room.price %>円/日</td>
+  </tr>
 </table>
 <h2>部屋を予約する</h2>
-
-<%= form_with model: @reservation  do |f| %>
-
-    <%= f.hidden_field :check_in, value: @reservation.check_in %>
-    <%= f.hidden_field :check_out, value: @reservation.check_out %>
-    <%= f.hidden_field :number_of_people, value: @reservation.number_of_people %>
-    <%= f.hidden_field :room_id, value: @room.id %>
-    <%= f.submit "予約する" %>
+<%= form_with model: @reservation, url: reservations_path, method: :post do |f| %>
+  <%= f.hidden_field :check_in %>
+  <%= f.hidden_field :check_out %>
+  <%= f.hidden_field :number_of_people %>
+  <%= f.hidden_field :room_id, value: @room.id %>
+  <%= f.submit "予約する" %>
 <% end %>
-<%= link_to '戻る', :back, class: "back-link" %>
+

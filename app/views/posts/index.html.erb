@@ -22,7 +22,7 @@
     </a>
     <div class="dropdown-menu" aria-labelledby="user-dropdown">
       <%= link_to "プロフィール", user_path(current_user), class: 'dropdown-item' %>
-      <%= link_to "アカウント情報", account_path, class: 'dropdown-item' %>
+      <%= link_to "アカウント情報", accounts_show_path, class: 'dropdown-item' %>
       <%= link_to '施設新規登録', new_room_path, class: 'dropdown-item' %>
       <div class="dropdown-divider"></div>
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
@@ -34,6 +34,7 @@
   <%= image_tag "https://rails-02-sample.herokuapp.com/assets/common/default-avatar-7a6cbfd7993e89f24bfc888f4a035a83c6f1428b8bdc47eed9095f2799a40153.png" %>
   <%= link_to "ログイン", new_user_session_path, class: 'post' %>
   <%= link_to "新規登録", new_user_registration_path, class: 'post' %>
+  <%= link_to "施設検索", house_path, class: 'post' %>
 <% end %>
 </header>
  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

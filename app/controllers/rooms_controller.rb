@@ -48,6 +48,7 @@ class RoomsController < ApplicationController
     @q = Room.ransack(params[:q])
     @rooms = @q.result(distinct: true)
   end
+  
   def room_params
     params.require(:room).permit(:name, :introduction, :price, :address, :avatar,:user_id,:room_id)
   end

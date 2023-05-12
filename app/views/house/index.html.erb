@@ -1,0 +1,19 @@
+
+<% if user_signed_in? %>
+    <p>予約済一覧</p>
+<% else %>
+<% end %>
+
+<%= search_form_for @q, url: rooms_search_path do |f| %>
+    <%= f.label :address_cont %>
+    <%= f.search_field :address_cont, :placeholder => "エリア名を入力"  %>
+
+    <%= f.submit %>
+<% end %>
+
+<%= search_form_for @q, url: rooms_search_path do |f| %>
+    <%= f.label :name_or_introduction_cont %>
+    <%= f.search_field :name_or_introduction_cont, :placeholder => "キーワードを入力"  %>
+
+    <%= f.submit %>
+<% end %>

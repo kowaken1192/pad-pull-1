@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+
   resources :reservations
   resources :rooms
   get 'accounts/show'
@@ -15,6 +16,9 @@ Rails.application.routes.draw do
   get '/reservations/new', to: 'reservations#new'
   get '/reservations/confirm', to: 'reservations#confirm', as: 'confirm_reservation'
   post '/reservations/confirm', to: 'reservations#confirm'
+  get 'rooms/search' ,to: 'rooms#search'
+  get 'house', to: 'house#index'
+  resources :house, :only => :index 
   resources :reservations do
     member do
       post 'confirm' ,to: 'reservations#confirm'

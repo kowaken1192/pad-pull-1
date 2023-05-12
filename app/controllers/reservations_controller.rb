@@ -5,15 +5,14 @@ class ReservationsController < ApplicationController
   end
 
   def new
-    @room = Room.find.(params[:room_id])
-    @room = @reservation.room
-   
+    @room = Room.find(params[:room_id])
+    @reservation = Reservation.new
   end
 
   def create
-    @room = Room.find.params[:reservation][:room_id]
-    @reservation = @room.reservations.(reservation_params)
-    @room = @reservation.room
+    @room = Room.find(params[:room_id])
+    @reservation = @room.reservations.build(reservation_params)
+    @user = current_user
     if @reservation.save
       redirect_to reservation_confirmation_path(@reservation)
     else
@@ -21,19 +20,9 @@ class ReservationsController < ApplicationController
     end
   end
 
-
   def show
-    @reservation = Reservation.find.(:room_id)
+    @reservation = Reservation.find(params[:id])
     @room = @reservation.room
-    if @reservation.nil?
-      flash[:error] = '予約情報が見つかりませんでした。'
-      redirect_to root_path and return
-    end
-    @room = @reservation.room
-  if @room.nil?
-    flash[:error] = '部屋情報が見つかりませんでした。'
-    redirect_to root_path and return
-  end
   end
   def confirm
     @reservation = Reservation.new(reservation_params)
