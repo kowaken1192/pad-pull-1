@@ -1,0 +1,2 @@
+module NewConfirmsHelper
+end

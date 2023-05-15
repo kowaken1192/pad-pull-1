@@ -10,12 +10,13 @@ class RoomsController < ApplicationController
   end
   def create
     @room = Room.new(room_params)
-      if @room.save
-        redirect_to @room, notice: 'Room was successfully created.'
-      else
-        render :new
-      end
+    if @room.save
+      redirect_to @room, notice: 'Room was successfully created.'
+    else
+      redirect_to new_room_path, alert: 'Failed to create a room.'
     end
+  end
+  
 
   def show
     @user = current_user

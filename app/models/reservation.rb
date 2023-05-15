@@ -1,5 +1,5 @@
 class Reservation < ApplicationRecord
-  belongs_to :user
+  belongs_to :user , optional: true
   belongs_to :room
   validates :check_in, presence: true
   validates :check_out, presence: true
@@ -11,13 +11,20 @@ class Reservation < ApplicationRecord
   def check_in_present?
     check_in.present?
   end
-  
+  def total_days
+    (check_out_in - check_in).to_i
+  end
+  def total_price
+    room = Room.find(room_id)
+    total_day * number_of_people.to_i *  @room.price.to_i
+  end
   validate :check_out_after_check_in
+
   
   def check_out_after_check_in
     if check_out && check_out <= check_in
       errors.add(:check_out, "はチェックイン日より後の日付にしてください")
     end
   end
-  
 end
+

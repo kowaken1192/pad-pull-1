@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>New Confirms</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Check in</th>
+      <th>Check out</th>
+      <th>Head count interger</th>
+      <th>User</th>
+      <th>Room</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @new_confirms.each do |new_confirm| %>
+      <tr>
+        <td><%= new_confirm.check_in %></td>
+        <td><%= new_confirm.check_out %></td>
+        <td><%= new_confirm.head_count_interger %></td>
+        <td><%= new_confirm.user_id %></td>
+        <td><%= new_confirm.room_id %></td>
+        <td><%= link_to 'Show', new_confirm %></td>
+        <td><%= link_to 'Edit', edit_new_confirm_path(new_confirm) %></td>
+        <td><%= link_to 'Destroy', new_confirm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New New Confirm', new_new_confirm_path %>
