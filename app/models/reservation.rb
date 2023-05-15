@@ -1,6 +1,6 @@
 class Reservation < ApplicationRecord
   belongs_to :user , optional: true
-  belongs_to :room
+  belongs_to :room , optional: true
   validates :check_in, presence: true
   validates :check_out, presence: true
   validates :head_count, presence: true, numericality: { only_integer: true, greater_than: 0 }
