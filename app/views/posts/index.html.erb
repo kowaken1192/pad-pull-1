@@ -22,7 +22,7 @@
     </a>
     <div class="dropdown-menu" aria-labelledby="user-dropdown">
       <%= link_to "プロフィール", user_path(current_user), class: 'dropdown-item' %>
-      <%= link_to "アカウント情報", accounts_show_path, class: 'dropdown-item' %>
+      <%= link_to 'Show Account', account_path %>
       <%= link_to '施設新規登録', new_room_path, class: 'dropdown-item' %>
       <div class="dropdown-divider"></div>
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'dropdown-item' %>

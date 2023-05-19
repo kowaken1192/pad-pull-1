@@ -25,11 +25,12 @@
   </tr>
 </table>
 
-<%= form_with model: @reservation, url: reservations_path do |f| %>
+<%= form_with model: @reservation, url: reservations_path, local: true do |f| %>
+  <%= f.hidden_field :user_id, value: current_user.id %>
+  <%= f.hidden_field :room_id, value: @room.id %>
   <%= f.hidden_field :check_in, value: @reservation.check_in %>
   <%= f.hidden_field :check_out, value: @reservation.check_out %>
   <%= f.hidden_field :number_of_people, value: @reservation.number_of_people %>
-  <%= f.hidden_field :user_id, value: @current_user.id %>
-  <%= f.hidden_field :room_id, value: @room.id %>
   <%= f.submit "予約する" %>
 <% end %>
+

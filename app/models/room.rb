@@ -1,5 +1,5 @@
  class Room < ApplicationRecord
-        belongs_to :user
+  belongs_to :user 
         has_one_attached :avatar
         has_many :reservations 
         def self.ransackable_attributes(auth_object = nil)
