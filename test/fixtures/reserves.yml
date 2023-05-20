@@ -3,13 +3,13 @@
 one:
   check_in: 2023-05-19
   check_out: 2023-05-19
-  number_of_people: 1
+  people: 1
   user: one
   room: one
 
 two:
   check_in: 2023-05-19
   check_out: 2023-05-19
-  number_of_people: 1
+  people: 1
   user: two
   room: two

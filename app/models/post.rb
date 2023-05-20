@@ -1,4 +1,4 @@
 class Post < ApplicationRecord
-    has_many :reservations
+    has_many :reserves
     has_many :rooms 
 end

@@ -16,7 +16,7 @@ class ReservationsTest < ApplicationSystemTestCase
 
     fill_in "Check in", with: @reservation.check_in
     fill_in "Check out", with: @reservation.check_out
-    fill_in "Head count", with: @reservation.head_count
+    fill_in "Number of people", with: @reservation.number_of_people
     fill_in "Room", with: @reservation.room_id
     fill_in "User", with: @reservation.user_id
     click_on "Create Reservation"
@@ -31,7 +31,7 @@ class ReservationsTest < ApplicationSystemTestCase
 
     fill_in "Check in", with: @reservation.check_in
     fill_in "Check out", with: @reservation.check_out
-    fill_in "Head count", with: @reservation.head_count
+    fill_in "Number of people", with: @reservation.number_of_people
     fill_in "Room", with: @reservation.room_id
     fill_in "User", with: @reservation.user_id
     click_on "Update Reservation"

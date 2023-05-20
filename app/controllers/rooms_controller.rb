@@ -1,14 +1,16 @@
 class RoomsController < ApplicationController
-  before_action :authenticate_user!, except: [:show] 
-  before_action :set_q, only: [:index, :search]
   def index
     @user = current_user
-    @rooms = current_user.rooms
+    @rooms = @user.rooms
+    @rooms = Room.all
+
   end
 
   def new
-    @room = current_user.rooms.build
+    @user = current_user
+    @room = Room.new
   end
+
   def create
     @user = current_user
     @room = Room.new(room_params)
@@ -19,16 +21,13 @@ class RoomsController < ApplicationController
       redirect_to new_room_path, alert: 'Failed to create a room.'
     end
   end
+
   def show
-  @user = current_user
-  if params[:id] == 'search'
-    # 'search'が渡された場合の処理を記述する
-    # 例えば、検索結果を表示するための処理を行う
-  else
+    
+    @user = current_user
     @room = Room.find(params[:id])
-    @reservation = Reservation.new
+    @reserve = Reserve.new
   end
-end
 
   def edit
     @user = current_user
@@ -37,7 +36,7 @@ end
 
   def update
     @room = Room.find(params[:id])
-    if @room.update(params.require(:room).permit(:name, :information, :price, :address, :user_id,:room_id, :image))
+    if @room.update(room_params)
       redirect_to rooms_path
     else
       render "edit"
@@ -50,16 +49,17 @@ end
     redirect_to rooms_path
   end
 
-    def search
-      @results = @q.result
-      @numbers = @q.result.count
-    end
-end
-  private
-  def set_q
+  def search
+    @user = current_user
     @q = Room.ransack(params[:q])
+    binding.pry
+    @rooms = @q.result(distinct: true)
   end
+
+  private
+
   def room_params
-    params.require(:room).permit(:name, :introduction, :price, :address, :avatar,:room_id).merge(user_id: current_user.id)
+    params.require(:room).permit(:name, :introduction, :price, :address, :avatar, :user_id, :room_id)
   end
+end
 

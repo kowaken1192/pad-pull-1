@@ -10,13 +10,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_05_17_175302) do
+ActiveRecord::Schema.define(version: 2023_05_19_232913) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
-    t.bigint "record_id", null: false
-    t.bigint "blob_id", null: false
+    t.integer "record_id", null: false
+    t.integer "blob_id", null: false
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
@@ -35,7 +35,7 @@ ActiveRecord::Schema.define(version: 2023_05_17_175302) do
   end
 
   create_table "active_storage_variant_records", force: :cascade do |t|
-    t.bigint "blob_id", null: false
+    t.integer "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
@@ -60,6 +60,19 @@ ActiveRecord::Schema.define(version: 2023_05_17_175302) do
     t.integer "number_of_people"
     t.index ["room_id"], name: "index_reservations_on_room_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
+  end
+
+  create_table "reserves", force: :cascade do |t|
+    t.date "check_in"
+    t.date "check_out"
+    t.integer "people"
+    t.integer "user_id", null: false
+    t.integer "room_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "head_count"
+    t.index ["room_id"], name: "index_reserves_on_room_id"
+    t.index ["user_id"], name: "index_reserves_on_user_id"
   end
 
   create_table "rooms", force: :cascade do |t|
@@ -96,5 +109,7 @@ ActiveRecord::Schema.define(version: 2023_05_17_175302) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "reservations", "rooms"
   add_foreign_key "reservations", "users"
+  add_foreign_key "reserves", "rooms"
+  add_foreign_key "reserves", "users"
   add_foreign_key "rooms", "users"
 end

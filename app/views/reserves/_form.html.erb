@@ -1,10 +1,10 @@
-<%= form_with(model: new_confirm) do |form| %>
-  <% if new_confirm.errors.any? %>
+<%= form_with(model: @reserve) do |form| %>
+  <% if @reserve.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(new_confirm.errors.count, "error") %> prohibited this new_confirm from being saved:</h2>
+      <h2><%= pluralize(@reserve.errors.count, "error") %> prohibited this reserve from being saved:</h2>
 
       <ul>
-        <% new_confirm.errors.each do |error| %>
+        <% @reserve.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -13,17 +13,17 @@
 
   <div class="field">
     <%= form.label :check_in %>
-    <%= form.text_field :check_in %>
+    <%= form.date_select :check_in %>
   </div>
 
   <div class="field">
     <%= form.label :check_out %>
-    <%= form.text_field :check_out %>
+    <%= form.date_select :check_out %>
   </div>
 
   <div class="field">
-    <%= form.label :head_count_interger %>
-    <%= form.text_field :head_count_interger %>
+    <%= form.label :people %>
+    <%= form.number_field :people %>
   </div>
 
   <div class="field">
@@ -40,3 +40,5 @@
     <%= form.submit %>
   </div>
 <% end %>
+
+
