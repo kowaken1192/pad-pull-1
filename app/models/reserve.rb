@@ -3,24 +3,28 @@ class Reserve < ApplicationRecord
   belongs_to :room
   validates :check_in, presence: true
   validates :check_out, presence: true
-  validates :head_count, presence: true, numericality: { only_integer: true, greater_than: 0 }
+  
   validate :check_out_after_check_in
   validates :check_out, presence: true, if: :check_in_present?
-  attr_accessor :number_of_people
+  validates :number_of_people, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
   
-  def calculate_and_save(room)
-    @check_in = self.check_in
-    @check_out = self.check_out
-    @total_day = (@check_out - @check_in).to_i
-    @number_of_people = self.number_of_people
-    @total_price = room.price.to_i * @total_day * @number_of_people.to_i
-
-    if self.save
-      return true
-    else
-      return false
+  def start_end_check
+    if checkin_at == nil
+      errors.add(:checkin_at,"開始日を入力してください")
+    elsif checkout_at == nil
+      errors.add(:checkout_at,"終了日を入力してください")
+    elsif checkout_at < checkin_at
+      errors.add(:checkout_at,"終了日は開始日以降の日付にしてください")
     end
+  end
+
+  def total_day
+    total_day = (checkout_at - checkin_at).to_i
+  end
+
+  def total_price
+    total_price = (total_day * person_count * room.fee)
   end
   def check_in_present?
     check_in.present?

@@ -7,28 +7,26 @@ class ReservesController < ApplicationController
 
   def new
     @room = Room.find(params[:room_id])
-    @reserve = Reserve.new
+    @reserve = @room.reserves.new
     @reserve.user_id = current_user.id
-    @reserve = @room_info.reserves.new
+    
   end
 
   def create
-    @reserve = Reserve.new(reserve_params)
-    @room = Room.find(params[:reserve][:room_id])
-    @reserve.room_id = @room.id
-    respond_to do |format|
-      if @reserve.calculate_and_save(@room)
-        format.html { redirect_to @reserve, notice: "Post was successfully created." }
-        format.json { render :show, status: :created, location: @reserve }
+      @reserve = Reserve.new(reserve_params)
+      @room = Room.find(params[:reserve][:room_id])
+      @reserve.room_id = @room.id
+      if @reserve.save
+        redirect_to @reserve, notice: 'Room was successfully created.'
       else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @reserve.errors, status: :unprocessable_entity }
+        render :new
       end
-    end
   end
+
 
     def show
       @reserves = Reserve.all
+      @reserve = Reserve.find(params[:id])
     if @reserve.nil?
       flash[:error] = '予約情報が見つかりませんでした。'
       redirect_to root_path and return
@@ -51,13 +49,11 @@ class ReservesController < ApplicationController
     @total_day = (@check_out - @check_in).to_i
     @number_of_people = @reserve.number_of_people
     @total_price = @room.price.to_i * @total_day * @reserve.number_of_people.to_i
-
-
   end
+end
   private
 
   def reserve_params
     params.require(:reserve).permit(:check_in, :check_out, :number_of_people, :room_id, :user_id)
   end
-end
 

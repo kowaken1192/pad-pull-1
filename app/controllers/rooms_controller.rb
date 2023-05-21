@@ -1,9 +1,10 @@
 class RoomsController < ApplicationController
+  before_action :set_q, only: [:index, :search]
   def index
     @user = current_user
     @rooms = @user.rooms
     @rooms = Room.all
-
+    
   end
 
   def new
@@ -23,12 +24,11 @@ class RoomsController < ApplicationController
   end
 
   def show
-    
-    @user = current_user
+    @user = current_user.id
     @room = Room.find(params[:id])
     @reserve = Reserve.new
+    
   end
-
   def edit
     @user = current_user
     @room = Room.find(params[:id])
@@ -50,16 +50,21 @@ class RoomsController < ApplicationController
   end
 
   def search
-    @user = current_user
-    @q = Room.ransack(params[:q])
     binding.pry
-    @rooms = @q.result(distinct: true)
+    @results = @q.result(distinct: true)
+   
   end
+
+
 
   private
 
   def room_params
     params.require(:room).permit(:name, :introduction, :price, :address, :avatar, :user_id, :room_id)
   end
+end
+
+def set_q
+  @q = Room.ransack(params[:q])
 end
 

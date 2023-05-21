@@ -1,15 +1,15 @@
+<%= form_tag('/search', method: 'get') do %>
+  <label for="area">エリア</label>
+  <select name="area" id="area">
+    <option value="">全て</option>
+    <option value="東京">東京</option>
+    <option value="大阪">大阪</option>
+    <option value="京都">京都</option>
+    <option value="札幌">札幌</option>
+  </select>
 
-<% if user_signed_in? %>
-    <p>予約済一覧</p>
-<% else %>
-<% end %>
+  <label for="keyword">キーワード</label>
+  <%= text_field_tag 'keyword', params[:keyword] %>
 
-<%= form_with(url: rooms_search_path, method: :get) do |f| %>
-  <%= f.label :name_cont, '施設名' %>
-  <%= f.text_field :name_cont %>
-
-  <%= f.label :address_cont, '住所' %>
-  <%= f.text_field :address_cont %>
-
-  <%= f.submit '検索' %>
+  <%= submit_tag '検索' %>
 <% end %>

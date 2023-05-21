@@ -1,24 +1,11 @@
-class HouseController < ApplicationController
-  before_action :set_q, only: [:index, :search]
+ class PagesController < ApplicationController
+    def index
+      @rooms = Room.search(params[:search])
+      @rooms = Room.where("roomname like ?", "%#{params[:keyword]}%")
+    end
 
-  def index
-    @user = current_user
-    @q = Room.ransack(params[:q])
-    @rooms = @q.result(distinct: true)
-  end
-
-  def show
-    @user = current_user
-  end
-
-  def search
-    @results = @q.result
-  end
-
-  private
-
-  def set_q
-    @q = Room.ransack(params[:q])
-  end
+    def show
+      @user = current_user
+    end
 end
 

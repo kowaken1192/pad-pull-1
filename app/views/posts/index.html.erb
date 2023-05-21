@@ -28,13 +28,55 @@
       <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
     </div>
   </div>
+ 
+
+<div class = "search_index">
+            
+<%= search_form_for @q, url: search_rooms_path do |f| %>
+  <%= f.label :name_or_introduction_cont ,"キーワード検索" %>
+  <%= f.search_field :name_or_introduction_cont %>
+  <%= f.submit "探す", class: "search-button" %>
+<% end %>
+</div>
+
+<div class = "all_spots">
+
+<div class="item-container">
+  <div class="item"> 
+    <div class="spot">    
+      <span>東京</span>
+      <%= link_to image_tag("https://rails-02-sample.herokuapp.com/assets/home/recommend-area/tokyo.jpg", size: "100x100"), search_rooms_path(q: { address_cont: "東京" }) %>
+    </div>
+  </div>
+
+  <div class="item"> 
+    <div class="spot">  
+      <span>大阪</span>
+      <%= link_to image_tag("https://rails-02-sample.herokuapp.com/assets/home/recommend-area/osaka.jpg", size: "100x100"), search_rooms_path(q: { address_cont: "大阪" }) %>
+    </div>
+  </div>
+
+  <div class="item"> 
+    <div class="spot">
+      <span>京都</span>
+      <%= link_to image_tag("https://rails-02-sample.herokuapp.com/assets/home/recommend-area/kyoto.jpg", size: "100x100"), search_rooms_path(q: { address_cont: "京都" }) %>
+    </div>  
+  </div>
+
+  <div class="item"> 
+    <div class="spot">
+      <span>札幌</span>
+      <%= link_to image_tag("https://rails-02-sample.herokuapp.com/assets/home/recommend-area/sapporo.jpg", size: "100x100"), search_rooms_path(q: { address_cont: "札幌" }) %>
+    </div>          
+  </div>
+</div>
 <% else %>
   <!-- ユーザーがログインしていなかった時の処理 -->
   <h2> 現在ログインしていません </h2>
   <%= image_tag "https://rails-02-sample.herokuapp.com/assets/common/default-avatar-7a6cbfd7993e89f24bfc888f4a035a83c6f1428b8bdc47eed9095f2799a40153.png" %>
   <%= link_to "ログイン", new_user_session_path, class: 'post' %>
   <%= link_to "新規登録", new_user_registration_path, class: 'post' %>
-  <%= link_to "施設検索", house_path, class: 'post' %>
+  
 <% end %>
 </header>
  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

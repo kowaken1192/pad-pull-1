@@ -1,7 +1,25 @@
 // Place all the styles related to the Posts controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
-.dropdown-toggle{
+.item-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .spot {
+    width: fit-content;
     text-align: center;
-    width: 100%;
-}
+  }
+  
+  .spot span {
+    display: block;
+    margin-top: 10px;
+  }
+  
+  
+  
+  
+  
+  
+  
+  
