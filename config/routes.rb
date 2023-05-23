@@ -20,7 +20,7 @@ Rails.application.routes.draw do
     end
   end
   resources :rooms do
-    collection do
+    collection  do
       get 'search', to: 'rooms#search'
     end
   end

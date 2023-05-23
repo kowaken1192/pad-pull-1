@@ -19,14 +19,15 @@ class ReservesController < ApplicationController
       if @reserve.save
         redirect_to @reserve, notice: 'Room was successfully created.'
       else
-        render :new
+        render "rooms/show"
       end
   end
-
-
+  def update
+    @reserve = Reserve.new(reserve_params)
+  end
     def show
       @reserves = Reserve.all
-      @reserve = Reserve.find(params[:id])
+   
     if @reserve.nil?
       flash[:error] = '予約情報が見つかりませんでした。'
       redirect_to root_path and return

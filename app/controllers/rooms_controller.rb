@@ -19,7 +19,7 @@ class RoomsController < ApplicationController
     if @room.save
       redirect_to @room, notice: 'Room was successfully created.'
     else
-      redirect_to new_room_path, alert: 'Failed to create a room.'
+    render :new
     end
   end
 
@@ -67,4 +67,3 @@ end
 def set_q
   @q = Room.ransack(params[:q])
 end
-

@@ -3,9 +3,10 @@ class PostsController < ApplicationController
 
   # GET /posts or /posts.json
   def index
+
     @posts = Post.all
-    @q = Room.ransack(params[:q])
-    @posts = @q.result(distinct: true).includes(:post).order("created_at desc")
+    @q = Post.ransack(params[:q])
+    @posts = @q.result(distinct: true).includes(:room).order("created_at desc")
   end
 
   # GET /posts/1 or /posts/1.json
