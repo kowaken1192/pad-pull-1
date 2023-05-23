@@ -1,9 +1,8 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: %i[ show edit update destroy ]
+  before_action :set_post, only: %i[show edit update destroy]
 
   # GET /posts or /posts.json
   def index
-
     @posts = Post.all
     @q = Post.ransack(params[:q])
     @posts = @q.result(distinct: true).includes(:room).order("created_at desc")
@@ -59,21 +58,23 @@ class PostsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
   def search
-    binding.pry
     @user = current_user
     @q = Room.ransack(params[:q])
-    binding.pry
     @rooms = @q.result(distinct: true)
   end
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.require(:post).permit(:name, :email, :password_digest)
-    end
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def post_params
+    params.require(:post).permit(:name, :email, :password_digest)
+  end
 end
+

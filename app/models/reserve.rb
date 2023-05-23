@@ -5,16 +5,7 @@ class Reserve < ApplicationRecord
   validates :check_out, presence: { message: "チェックアウト日を入力してください" }
   validate :check_out_after_check_in
   validates :number_of_people, presence: true, numericality: { only_integer: true, greater_than: 0 }
-  def total_day
-    total_day = (checkout_at - checkin_at).to_i
-  end
-
-  def total_price
-    total_price = (total_day * person_count * room.fee)
-  end
-  def check_in_present?
-    check_in.present?
-  end
+ 
   def total_days
     (check_out_in - check_in).to_i
   end

@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
   before_action :set_q, only: [:index, :search]
+
   def index
     @user = current_user
     @rooms = @user.rooms
@@ -18,7 +19,7 @@ class RoomsController < ApplicationController
     if @room.save
       redirect_to @room, notice: 'Room was successfully created.'
     else
-    render :new
+      render :new
     end
   end
 
@@ -26,8 +27,8 @@ class RoomsController < ApplicationController
     @user = current_user.id
     @room = Room.find(params[:id])
     @reserve = Reserve.new
-    
   end
+
   def edit
     @user = current_user
     @room = Room.find(params[:id])
@@ -52,13 +53,14 @@ class RoomsController < ApplicationController
     @results = @q.result(distinct: true)
     @rooms = Room.where(some_condition: true)
   end
+
   private
 
   def room_params
     params.require(:room).permit(:name, :introduction, :price, :address, :avatar, :user_id, :room_id)
   end
-end
 
-def set_q
-  @q = Room.ransack(params[:q])
+  def set_q
+    @q = Room.ransack(params[:q])
+  end
 end
