@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  resources :rooms do
+    collection  do
+      get 'search', to: 'rooms#search'
+    end
+  end
   resources :reserves
   devise_for :users
   resources :rooms
@@ -14,14 +19,11 @@ Rails.application.routes.draw do
   get '/reserves/confirm', to: 'reserves#confirm', as: 'confirm_reserve'
   post '/reserves/confirm', to: 'reserves#confirm'
   get '/reserves/confirm', to: 'reserves#index'
+  get '/rooms/search', to: 'rooms#search'
+  
   resources :reserves, only: [:index, :new, :create, :show] do
     collection do
       post 'confirm'
-    end
-  end
-  resources :rooms do
-    collection  do
-      get 'search', to: 'rooms#search'
     end
   end
 end

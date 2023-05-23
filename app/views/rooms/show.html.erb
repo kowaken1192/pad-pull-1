@@ -12,6 +12,8 @@
 <div class="price">
   宿泊料金： <%= @room.price %>円/日
 </div>
+<%= notice %>
+<%= alert %>
 <%= form_with model: @reserve, url: confirm_reserve_path, method: :post do |f| %>
 <%= render 'layouts/error_messages', model: @reserve %>
   <table>

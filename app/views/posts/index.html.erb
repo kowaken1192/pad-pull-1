@@ -16,17 +16,22 @@
 <header>
 <% if user_signed_in? %>
   <!-- ユーザーがログインしていた時の処理 -->
-  <div class="dropdown">
+<div class="dropdown">
     <a class="dropdown-toggle ml-auto" href="#" id="user-dropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       名前 <%= current_user.name %>
     </a>
-    <div class="dropdown-menu" aria-labelledby="user-dropdown">
-      <%= link_to "プロフィール", user_path(current_user), class: 'dropdown-item' %>
-      <%= link_to 'Show Account', account_path %>
-      <%= link_to '施設新規登録', new_room_path, class: 'dropdown-item' %>
-      <div class="dropdown-divider"></div>
-      <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
-    </div>
+    </a>
+<div class="dropdown-menu" aria-labelledby="user-dropdown">
+  <%= link_to "プロフィール", user_path(current_user), class: 'dropdown-item' %>
+  <%= link_to "施設予約一覧", reserves_path, class: 'dropdown-item' %> 
+  <%= link_to "部屋予約一覧", rooms_path, class: 'dropdown-item' %>
+  <%= link_to 'Show Account', account_path, class: 'dropdown-item' %>
+  <%= link_to '施設新規登録', new_room_path, class: 'dropdown-item' %>
+  <div class="dropdown-divider"></div>
+  <%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: 'dropdown-item' %>
+</div>
+</div>
+
   </div>
  
 

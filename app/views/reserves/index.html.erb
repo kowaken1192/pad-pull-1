@@ -22,6 +22,7 @@
         <td><%= reserve.check_in.strftime('%Y/%m/%d') %></td>
         <td><%= reserve.check_out.strftime('%Y/%m/%d') %></td>
         <td><%= reserve.created_at.strftime('%Y/%m/%d %H:%M') %></td>
+        <td><%= link_to '編集',   edit_reserf_path(reserve) %></td>
       </tr>
     <% end %>
   </tbody>

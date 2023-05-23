@@ -4,7 +4,6 @@ class RoomsController < ApplicationController
     @user = current_user
     @rooms = @user.rooms
     @rooms = Room.all
-    
   end
 
   def new
@@ -50,13 +49,9 @@ class RoomsController < ApplicationController
   end
 
   def search
-    binding.pry
     @results = @q.result(distinct: true)
-   
+    @rooms = Room.where(some_condition: true)
   end
-
-
-
   private
 
   def room_params
