@@ -1,0 +1,2 @@
+module NewConfrimHelper
+end

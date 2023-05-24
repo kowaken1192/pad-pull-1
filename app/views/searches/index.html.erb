@@ -1,0 +1,27 @@
+<div class = "search" > 
+    <h1>検索結果：<%= @results.count %>件</h1>
+
+    <div class = "search_base" >
+        <% @results.each do |results| %>
+                
+                    <div class = "search_room_img" >
+                    <% if results.room_image? %>
+                       <%= image_tag results.room_image_url if results.room_image.present? %>
+                       <%else%>
+                       <%= image_tag "https://rails-02-sample.herokuapp.com/assets/room/default-image-4e0ac6b8d01335b5b22fe6586af13644ae51dddb6aeabf35b9174e80f13cd09d.png",size: "300x200" %>
+                    <%end%>
+                    </div>
+
+                    <div class = "search_room" >
+                    <%= link_to results do %>
+                        <h1><%= results.name %></h1>
+                    <% end %>
+                        <h4>コメント:<%= results.introduction %></h4>
+                        <h4>エリア名：<%= results.address %></h4>
+                        <h4>金額：<%= results.price %>円</h4>
+                    </div>
+            </div>
+        <% end %>
+    </div>
+    <a href="javascript:history.back()">[戻る]</a>
+</div>

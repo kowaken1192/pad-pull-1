@@ -1,0 +1,15 @@
+<%= form_tag('/search', method: 'get') do %>
+  <label for="area">エリア</label>
+  <select name="area" id="area">
+    <option value="">全て</option>
+    <option value="東京">東京</option>
+    <option value="大阪">大阪</option>
+    <option value="京都">京都</option>
+    <option value="札幌">札幌</option>
+  </select>
+
+  <label for="keyword">キーワード</label>
+  <%= text_field_tag 'keyword', params[:keyword] %>
+
+  <%= submit_tag '検索' %>
+<% end %>
